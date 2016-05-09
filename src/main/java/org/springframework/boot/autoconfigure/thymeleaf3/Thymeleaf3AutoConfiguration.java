@@ -93,6 +93,10 @@ public class Thymeleaf3AutoConfiguration {
                             + "your Thymeleaf configuration)");
                 }
             }
+            //HTML5 to HTML
+            if ("HTML5".equalsIgnoreCase(properties.getMode())) {
+                properties.setMode("HTML");
+            }
         }
 
         @Bean
