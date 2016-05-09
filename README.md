@@ -24,6 +24,10 @@ in your pom.xml, add following dependencies:
         </dependency>
 ```
 
+### Changes
+
+* HTML5 converted to HTML automatically
+
 ### Attention
 
-* Abstract Dialect problem
+* Abstract Dialect compatible problem with Thymeleaf 3
