@@ -40,6 +40,7 @@ import org.springframework.core.Ordered;
 import org.springframework.util.MimeType;
 import org.springframework.web.servlet.ViewResolver;
 import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
@@ -48,6 +49,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import javax.annotation.PostConstruct;
 import javax.servlet.Servlet;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * {@link EnableAutoConfiguration Auto-configuration} for Thymeleaf3.
@@ -70,7 +72,8 @@ public class Thymeleaf3AutoConfiguration {
     public static class DefaultTemplateResolverConfiguration implements ApplicationContextAware {
         @Autowired
         private ThymeleafProperties properties;
-
+        @Autowired(required = false)
+        private List<IDialect> dialects;
         private ApplicationContext applicationContext;
 
         @Override
@@ -96,7 +99,13 @@ public class Thymeleaf3AutoConfiguration {
         //made this @Bean (vs private in Thymeleaf migration docs ), otherwise MessageSource wasn't autowired.
         public TemplateEngine templateEngine() {
             SpringTemplateEngine engine = new SpringTemplateEngine();
+            engine.setEnableSpringELCompiler(true);
             engine.setTemplateResolver(templateResolver());
+            if (dialects != null) {
+                for (IDialect dialect : dialects) {
+                    engine.addDialect(dialect);
+                }
+            }
             return engine;
         }
 
