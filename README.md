@@ -31,3 +31,7 @@ in your pom.xml, add following dependencies:
 ### Attention
 
 * Abstract Dialect compatible problem with Thymeleaf 3
+
+### References
+
+* Thymeleaf 3 ten-minute migration guide: http://www.thymeleaf.org/doc/articles/thymeleaf3migration.html
