@@ -128,7 +128,7 @@ public class Thymeleaf3AutoConfiguration {
             ThymeleafViewResolver resolver = new ThymeleafViewResolver();
             resolver.setOrder(2147483642);
             resolver.setTemplateEngine(templateEngine());
-            resolver.setCharacterEncoding("UTF-8");
+            resolver.setCharacterEncoding(properties.getEncoding().displayName());
             return resolver;
         }
 
